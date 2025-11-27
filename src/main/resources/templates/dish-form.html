@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="post" th:action="@{${dish == null ? '/dishes/add' : '/dishes/edit/' + dish.getId()}}">
+        <div>
+            <label for="dishId">ID</label>
+            <input type="text"
+                   id="dishId"
+                   name="dishId"
+                   th:value="${dish != null ? dish.getDishId() : ''}"
+                   required
+                   placeholder="Enter dish ID">
+        </div>
+        <div>
+            <label for="name">Name</label>
+            <input type="text"
+                   id="name"
+                   name="name"
+                   th:value="${dish != null ? dish.getName() : ''}"
+                   required
+                   placeholder="Enter dish name">
+        </div>
+        <div>
+            <label for="cuisine">Cuisine</label>
+            <input type="text"
+                   id="cuisine"
+                   name="cuisine"
+                   th:value="${dish != null ? dish.getCuisine() : ''}"
+                   required
+                   placeholder="Enter cuisine">
+        </div>
+        <div>
+            <label for="preparationTime">Preparation Time</label>
+            <input type="text"
+                   id="preparationTime"
+                   name="preparationTime"
+                   th:value="${dish != null ? dish.getPreparationTime() : ''}"
+                   required
+                   placeholder="Enter preparation time">
+        </div>
+
+        <button th:text="${dish == null ? 'ADD' : 'EDIT'}"></button>
+    </form>
+</body>
+</html>

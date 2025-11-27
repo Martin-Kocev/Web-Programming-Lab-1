@@ -6,8 +6,20 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Dish {
-    String dishId;
-    String name;
-    String cuisine;
-    int preparationTime;
+    private Long id;
+    private String dishId;
+    private String name;
+    private String cuisine;
+    private int preparationTime;
+
+    static Long availableID = 1L;
+
+    public Dish(String dishId, String name, String cuisine, int preparationTime) {
+        this.dishId = dishId;
+        this.name = name;
+        this.cuisine = cuisine;
+        this.preparationTime = preparationTime;
+
+        id = availableID++;
+    }
 }

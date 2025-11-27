@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/chefDetails" method="post">
+    <input th:if="${chefId != null}" type="hidden" name="chefId" th:value="${chefId}">
+    <div th:each="dish : ${dishes}">
+        <input th:if="${chefId != null}" th:id="${dish.getId()}" name="dishId" th:value="${dish.getId()}" type="radio">
+        <label th:for=" ${dish.getId()}"
+               th:text="${dish.getId()} + ' ' + ${dish.getName()} + ' ' + ${dish.getCuisine()} + ' ' + ${dish.getPreparationTime()}"></label>
+        <button th:if="${chefId == null}" th:formaction="@{'/dishes/delete/{id}' (id=${dish.getId()})}" type="submit">DELETE</button>
+        <button th:if="${chefId == null}" th:formaction="@{'/dishes/dish-form/{id}' (id=${dish.getId()})}" type="submit">EDIT</button>
+    </div>
+    <button th:if="${chefId != null}" type="submit">ADD TO CHEF</button>
+</form>
+<form th:if="${chefId == null}" th:action="@{'/dishes/dish-form'}">
+    <button type="submit">ADD DISH</button>
+</form>
+
+
+</body>
+</html>
