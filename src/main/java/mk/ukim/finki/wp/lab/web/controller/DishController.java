@@ -29,8 +29,8 @@ public class DishController {
     }
 
     @PostMapping("/add")
-    public String saveDish(@RequestParam String dishId, @RequestParam String name, @RequestParam String cuisine, @RequestParam int preparationTime) {
-        dishService.create(dishId, name, cuisine, preparationTime);
+    public String saveDish(@RequestParam String name, @RequestParam String cuisine, @RequestParam int preparationTime) {
+        dishService.create(name, cuisine, preparationTime);
 
         return "redirect:/dishes";
     }
@@ -43,8 +43,8 @@ public class DishController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editDish(@PathVariable Long id, @RequestParam String dishId, @RequestParam String name, @RequestParam String cuisine, @RequestParam int preparationTime) {
-        dishService.update(id, dishId, name, cuisine, preparationTime);
+    public String editDish(@PathVariable Long id, @RequestParam String name, @RequestParam String cuisine, @RequestParam int preparationTime) {
+        dishService.update(id, name, cuisine, preparationTime);
 
         return "redirect:/dishes";
     }

@@ -19,10 +19,10 @@ public class DishServiceImpl implements DishService{
         return dishRepository.findAll();
     }
 
-    @Override
-    public Dish findByDishId(String dishId) {
-        return dishRepository.findByDishId(dishId);
-    }
+//    @Override
+//    public Dish findByDishId(String dishId) {
+//        return dishRepository.findByDishId(dishId);
+//    }
 
     @Override
     public Dish findById(Long id) {
@@ -30,18 +30,19 @@ public class DishServiceImpl implements DishService{
     }
 
     @Override
-    public Dish create(String dishId, String name, String cuisine, int preparationTime) {
-        return dishRepository.save(new Dish(dishId, name, cuisine, preparationTime));
+    public Dish create(String name, String cuisine, int preparationTime) {
+        return dishRepository.save(new Dish(name, cuisine, preparationTime, null));
     }
 
     @Override
-    public Dish update(Long id, String dishId, String name, String cuisine, int preparationTime) {
+    public Dish update(Long id, String name, String cuisine, int preparationTime) {
         Dish dish = dishRepository.findById(id).orElseThrow();
 
-        dish.setDishId(dishId);
         dish.setName(name);
         dish.setCuisine(cuisine);
         dish.setPreparationTime(preparationTime);
+
+        dishRepository.save(dish);
 
         return dish;
     }

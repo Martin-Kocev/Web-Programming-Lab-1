@@ -7,15 +7,6 @@
 <body>
     <form method="post" th:action="@{${dish == null ? '/dishes/add' : '/dishes/edit/' + dish.getId()}}">
         <div>
-            <label for="dishId">ID</label>
-            <input type="text"
-                   id="dishId"
-                   name="dishId"
-                   th:value="${dish != null ? dish.getDishId() : ''}"
-                   required
-                   placeholder="Enter dish ID">
-        </div>
-        <div>
             <label for="name">Name</label>
             <input type="text"
                    id="name"
