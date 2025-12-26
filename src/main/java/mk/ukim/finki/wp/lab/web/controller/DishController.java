@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.lab.web.controller;
 
 import mk.ukim.finki.wp.lab.service.DishService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class DishController {
         return "listDishes";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String saveDish(@RequestParam String name, @RequestParam String cuisine, @RequestParam int preparationTime) {
         dishService.create(name, cuisine, preparationTime);
@@ -35,6 +37,7 @@ public class DishController {
         return "redirect:/dishes";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteDish(@PathVariable Long id) {
         dishService.delete(id);
@@ -42,6 +45,7 @@ public class DishController {
         return "redirect:/dishes";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit/{id}")
     public String editDish(@PathVariable Long id, @RequestParam String name, @RequestParam String cuisine, @RequestParam int preparationTime) {
         dishService.update(id, name, cuisine, preparationTime);
@@ -49,6 +53,7 @@ public class DishController {
         return "redirect:/dishes";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/dish-form/{id}")
     public String getEditDishForm(@PathVariable Long id, Model model) {
         if (dishService.findById(id) == null) {
@@ -59,6 +64,7 @@ public class DishController {
         return "dish-form";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/dish-form")
     public String getAddDishPage(@RequestParam(required = false) String chefId, Model model) {
 

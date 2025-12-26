@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,14 +12,22 @@
         <input th:if="${chefId != null}" th:id="${dish.getId()}" name="dishId" th:value="${dish.getId()}" type="radio">
         <label th:for=" ${dish.getId()}"
                th:text="${dish.getId()} + ' ' + ${dish.getName()} + ' ' + ${dish.getCuisine()} + ' ' + ${dish.getPreparationTime()}"></label>
-        <button th:if="${chefId == null}" th:formaction="@{'/dishes/delete/{id}' (id=${dish.getId()})}" type="submit">DELETE</button>
-        <button th:if="${chefId == null}" th:formaction="@{'/dishes/dish-form/{id}' (id=${dish.getId()})}" type="submit">EDIT</button>
+        <button sec:authorize="hasRole('ADMIN')" th:if="${chefId == null}" th:formaction="@{'/dishes/delete/{id}' (id=${dish.getId()})}" type="submit">DELETE</button>
+        <button sec:authorize="hasRole('ADMIN')" th:if="${chefId == null}" th:formaction="@{'/dishes/dish-form/{id}' (id=${dish.getId()})}" type="submit">EDIT</button>
     </div>
     <button th:if="${chefId != null}" type="submit">ADD TO CHEF</button>
 </form>
-<form th:if="${chefId == null}" th:action="@{'/dishes/dish-form'}">
+<form sec:authorize="isAuthenticated()" th:if="${chefId == null}" th:action="@{'/dishes/dish-form'}">
     <button type="submit">ADD DISH</button>
 </form>
+<span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
+<a sec:authorize="isAuthenticated()" class="btn btn-light btn-sm ml-3" href="/logout">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
+</a>
+<a sec:authorize="isAnonymous()" class="btn btn-light btn-sm ml-3" href="/login">
+    <i class="fa-solid fa-right-to-bracket"></i> Login
+</a>
+
 
 
 </body>

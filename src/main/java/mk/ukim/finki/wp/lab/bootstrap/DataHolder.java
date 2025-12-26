@@ -9,8 +9,6 @@ import mk.ukim.finki.wp.lab.repository.DishRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
-
 @AllArgsConstructor
 @Component
 public class DataHolder {
